@@ -21,19 +21,15 @@ Player &Scientist::discover_cure(const Color &color)
         throw std::invalid_argument{"can't have cards for this action "};
     }
     int count = 1;
-    for (auto it = cards.begin(); it != cards.end(); count++)
+    for (auto i = cards.begin(); i != cards.end()&&count!=n; count++)
     {
-        if (count == n)
+        if (citiesColers.at(*i) == color)
         {
-            break;
-        }
-        if (citiesColers.at(*it) == color)
-        {
-            it = cards.erase(it);
+            i = cards.erase(i);
         }
         else
         {
-            ++it;
+            ++i;
         }
     }
     board.add_cure_discover(color);
